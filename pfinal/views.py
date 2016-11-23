@@ -1,4 +1,8 @@
 from django.shortcuts import render
+
+def lista_estudiantes(request):
+    return render(request, 'pfinal/lista_estudiantes.html', {})
+#
 #from django.contrib.auth.models import User
 #from django.contrib.auth import authenticate, login
 ## Create your views here.
@@ -7,6 +11,3 @@ from django.shortcuts import render
 #    if request.method == 'POST':
 #        action = request.POST.get('action',None)
 #        
-
-def lista_estudiantes(request):
-    return render(request, 'blog/lista_estudiantes.html', {})
