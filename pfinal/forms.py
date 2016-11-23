@@ -12,12 +12,15 @@ class CursoForm(forms.ModelForm):
         fields = ('nombre', 'descripcion',)
 
 class MatriculaForm(forms.ModelForm):
+    
     class Meta:
         model = Matricula
         fields = ('curso', 'estudiante',)
         
-#    def __init__ (self, *args, **kwargs):
-#        super(MatriculaForm, self).__init__(*args, **kwargs)
-#        self.fields["estudiante"].widget = forms.widgets.CheckboxSelectMultiple()
-#        self.fields["estudiante"].help_text = "Seleccione los alumnos para el curso"
-#        self.fields["estudiante"].queryset = Estudiante.objects.all()
+def __init__ (self, *args, **kwargs):
+    super(MatriculaForm, self).__init__(*args, **kwargs)
+    self.fields["estudiante"].widget = forms.widgets.CheckboxSelectMultiple()
+    
+    self.fields["estudiante"].help_text = "Seleccione los alumnos para el curso"
+    
+    self.fields["estudiante"].queryset = Estudiante.objects.all()
