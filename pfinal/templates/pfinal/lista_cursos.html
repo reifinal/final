@@ -1,11 +1,31 @@
-{% extends 'pfinal/base.html' %}
+{% extends 'pfinal/base2.html' %}
+
+{% block nombre_u %}
+    {{user.username}}
+{% endblock nombre_u %}
+
+{% block uper %}
+    {% if user.is_superuser %}
+    <li>
+        <a href="{% url 'pfinal.views.nuevo_estudiante' %}"><i class="fa fa-fw"></i>Crear alumno</a>
+    </li>
+    <li>
+        <a href="{% url 'pfinal.views.nuevo_curso' %}"><i class="fa fa-fw"></i>Crear cursos</a>
+    </li>
+    <li>
+        <a href="{% url 'pfinal.views.nuevo_matricula' %}"><i class="fa fa-fw"></i>Matricular</a>
+    </li>
+    {% endif %}
+{% endblock uper %}
+
+{% block nombre_p %}
+    Lista de cursos
+{% endblock nombre_p %}
 
 {% block content %}
     {% for curso in cursos %}
-    <div class="post">
-        <p>Curso: </p>
-        <h1><a href="{% url 'pfinal.views.detalle_curso' pk=curso.pk %}">{{ curso.nombre }}</a></h1>
-        <p>Descripcion: {{ curso.descripcion }}</p>
-    </div>
+    <h1>{{ curso.nombre }}</h1>
+    <p>Descripcion: {{ curso.descripcion }}</p>
+    <p><a href="{% url 'pfinal.views.detalle_curso' pk=curso.pk %}" class="btn btn-primary" role="button">Detalles</a></p>
     {% endfor %}
 {% endblock content %}

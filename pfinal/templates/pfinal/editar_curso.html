@@ -1,10 +1,33 @@
-{% extends 'pfinal/base.html' %}
+{% extends 'pfinal/base2.html' %}
+
+{% block nombre_u %}
+    {{user.username}}
+{% endblock nombre_u %}
+
+{% block uper %}
+    {% if user.is_superuser %}
+    <li>
+        <a href="{% url 'pfinal.views.nuevo_estudiante' %}"><i class="fa fa-fw"></i>Crear alumno</a>
+    </li>
+    <li>
+        <a href="{% url 'pfinal.views.nuevo_curso' %}"><i class="fa fa-fw"></i>Crear cursos</a>
+    </li>
+    <li>
+        <a href="{% url 'pfinal.views.nuevo_matricula' %}"><i class="fa fa-fw"></i>Matricular</a>
+    </li>
+    {% endif %}
+{% endblock uper %}
+
+{% block nombre_p %}
+    Nuevo curso
+{% endblock nombre_p %}
 
 {% block content %}
-    <h1>Nuevo curso</h1>
-    <form method="POST" class="post-form">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="save btn btn-default">Guardar</button>
-    </form>
+    <div class="col-lg-6">
+        <form role="form" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-default">Guardar</button>
+        </form>
+    </div>
 {% endblock %}

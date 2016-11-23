@@ -1,9 +1,29 @@
-{% extends 'pfinal/base.html' %}
+{% extends 'pfinal/base2.html' %}
+
+{% block nombre_u %}
+    {{user.username}}
+{% endblock nombre_u %}
+
+{% block uper %}
+    {% if user.is_superuser %}
+    <li>
+        <a href="{% url 'pfinal.views.nuevo_estudiante' %}"><i class="fa fa-fw"></i>Crear alumno</a>
+    </li>
+    <li>
+        <a href="{% url 'pfinal.views.nuevo_curso' %}"><i class="fa fa-fw"></i>Crear cursos</a>
+    </li>
+    <li>
+        <a href="{% url 'pfinal.views.nuevo_matricula' %}"><i class="fa fa-fw"></i>Matricular</a>
+    </li>
+    {% endif %}
+{% endblock uper %}
+
+{% block nombre_p %}
+    Detalle de estudiantes
+{% endblock nombre_p %}
 
 {% block content %}
-    <div class="post">
-        <h1>{{ estudiantes.nombre }} {{ estudiantes.apellido }}</h1>
-        <p>Telefono: {{ estudiantes.telefono }}</p>
-        <a class="btn btn-default" href="{% url 'editar_estudiante' pk=estudiantes.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
-    </div>
-{% endblock %}
+    <h1>{{ estudiantes.nombre }} {{ estudiantes.apellido }}</h1>
+    <p>Telefono: {{ estudiantes.telefono }}</p>
+    <p><a href="{% url 'editar_estudiante' pk=estudiantes.pk %}" class="btn btn-primary" role="button">Editar</a></p>
+{% endblock content %}

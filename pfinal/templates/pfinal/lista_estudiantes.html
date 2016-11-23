@@ -1,20 +1,31 @@
-{% extends 'pfinal/base.html' %}
+{% extends 'pfinal/base2.html' %}
+
+{% block nombre_u %}
+    {{user.username}}
+{% endblock nombre_u %}
+
+{% block uper %}
+    {% if user.is_superuser %}
+    <li>
+        <a href="{% url 'pfinal.views.nuevo_estudiante' %}"><i class="fa fa-fw"></i>Crear alumno</a>
+    </li>
+    <li>
+        <a href="{% url 'pfinal.views.nuevo_curso' %}"><i class="fa fa-fw"></i>Crear cursos</a>
+    </li>
+    <li>
+        <a href="{% url 'pfinal.views.nuevo_matricula' %}"><i class="fa fa-fw"></i>Matricular</a>
+    </li>
+    {% endif %}
+{% endblock uper %}
+
+{% block nombre_p %}
+    Lista de estudiantes
+{% endblock nombre_p %}
 
 {% block content %}
     {% for estudiante in estudiantes %}
-    <div class="post">
-        <p>Estudiante: </p>
-        <h1><a href="{% url 'pfinal.views.detalle_estudiante' pk=estudiante.pk %}">{{ estudiante.nombre }} {{ estudiante.apellido }}</a></h1>
-        <p>Telefono: {{ estudiante.telefono }}</p>
-    </div>
-    
+    <h1>{{ estudiante.nombre }} {{ estudiante.apellido }}</h1>
+    <p>Telefono: {{ estudiante.telefono }}</p>
+    <p><a href="{% url 'pfinal.views.detalle_estudiante' pk=estudiante.pk %}" class="btn btn-primary" role="button">Detalles</a></p>
     {% endfor %}
-
-    {% if user.is_authenticated %}
-        {{user.username}}
-    <a href="{% url 'logout' %}">salir</a>
-    {% endif %}
-    {% if not user.is_authenticated %}
-    <a href="{% url 'authentication' %}">iniciar</a>
-    {% endif %}
 {% endblock content %}
