@@ -4,4 +4,6 @@ from . import views
 urlpatterns = [
     url(r'^$', views.lista_estudiantes),
     url(r'^estudiante/(?P<pk>[0-9]+)/$', views.detalle_estudiante),
+    url(r'^estudiante/nuevo/$', views.nuevo_estudiante, name='nuevo_estudiante'),
+    url(r'^estudiante/(?P<pk>[0-9]+)/editar/$', views.editar_estudiante, name='editar_estudiante'),
     ]
