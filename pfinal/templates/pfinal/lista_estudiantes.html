@@ -1,9 +1,11 @@
-{{ estudiante }}
+{% extends 'pfinal/base.html' %}
 
-{% for estudiante in estudiantes %}
-        <div>
-            <p>Nombre: {{ estudiante.nombre }}</p>
-            <p>Apellido: {{ estudiante.apellido }}</p>
-            <p>Telefono: {{ estudiante.telefono }}</p>
-        </div>
-{% endfor %}
+{% block content %}
+    {% for estudiante in estudiantes %}
+    <div class="post">
+        <p>Estudiante: </p>
+        <h1><a href="{% url 'pfinal.views.detalle_estudiante' pk=estudiante.pk %}">{{ estudiante.nombre }} {{ estudiante.apellido }}</a></h1>
+        <p>Telefono: {{ estudiante.telefono }}</p>
+    </div>
+    {% endfor %}
+{% endblock content %}
