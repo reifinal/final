@@ -10,4 +10,6 @@ urlpatterns = [
     url(r'^curso/(?P<pk>[0-9]+)/$', views.detalle_curso),
     url(r'^curso/nuevo/$', views.nuevo_curso, name='nuevo_curso'),
     url(r'^curso/(?P<pk>[0-9]+)/editar/$', views.editar_curso, name='editar_curso'),
+    url(r'^matricula/nuevo/$', views.nuevo_matricula, name='nuevo_matricula'),
+    url(r'^curso/(?P<pk>[0-9]+)/borrar/$', views.borrar_curso, name='borrar_curso'),
     ]

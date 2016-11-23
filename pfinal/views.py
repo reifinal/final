@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Estudiante, Curso
-from .forms import EstudianteForm, CursoForm
+from .models import Estudiante, Curso, Matricula
+from .forms import EstudianteForm, CursoForm, MatriculaForm
+from django.http.response import HttpResponseRedirect
 
 def lista_estudiantes(request):
     estudiantes = Estudiante.objects.all().order_by('apellido')
@@ -59,6 +60,28 @@ def editar_curso(request, pk):
     else:
         form = CursoForm(instance=cursos)
     return render(request, 'pfinal/editar_curso.html', {'form': form})
+
+#Vista para insertar tabla relacionada
+def nuevo_matricula(request):
+    if request.method == "POST":
+        form = MatriculaForm(request.POST)
+        if form.is_valid():
+            cursos = request.POST.get('curso')
+            
+            for estudiantes in request.POST.getlist('estudiante'):
+                matriculas = Matricula(estudiante_id = estudiantes, curso_id = cursos)
+                matriculas.save()
+                
+    else:
+        form = MatriculaForm()
+    return render(request, 'pfinal/lista_estudiantes.html', {'form': form})
+
+def borrar_curso(request, pk):
+    cursos = Curso.objects.filter(pk=pk)
+    cursos.delete()
+    return HttpResponseRedirect('/curso/')
+
+
 
 #
 #from django.contrib.auth.models import User
