@@ -1,7 +1,9 @@
 from django.shortcuts import render
+from .models import Estudiante
 
 def lista_estudiantes(request):
-    return render(request, 'pfinal/lista_estudiantes.html', {})
+    estudiantes = Estudiante.objects.all().order_by('apellido')
+    return render(request, 'pfinal/lista_estudiantes.html', {'estudiantes':estudiantes})
 #
 #from django.contrib.auth.models import User
 #from django.contrib.auth import authenticate, login

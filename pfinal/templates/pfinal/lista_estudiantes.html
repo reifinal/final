@@ -1,0 +1,9 @@
+{{ estudiante }}
+
+{% for estudiante in estudiantes %}
+        <div>
+            <p>Nombre: {{ estudiante.nombre }}</p>
+            <p>Apellido: {{ estudiante.apellido }}</p>
+            <p>Telefono: {{ estudiante.telefono }}</p>
+        </div>
+{% endfor %}
