@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Estudiante
-from .forms import EstudianteForm
+from .models import Estudiante, Curso
+from .forms import EstudianteForm, CursoForm
 
 def lista_estudiantes(request):
     estudiantes = Estudiante.objects.all().order_by('apellido')
@@ -30,6 +30,36 @@ def editar_estudiante(request, pk):
     else:
         form = EstudianteForm(instance=estudiantes)
     return render(request, 'pfinal/editar_estudiante.html', {'form': form})
+
+def lista_cursos(request):
+    cursos = Curso.objects.all().order_by('nombre')
+    return render(request, 'pfinal/lista_cursos.html', {'cursos':cursos})
+
+def detalle_curso(request, pk):
+    cursos = get_object_or_404(Curso, pk=pk)
+    return render(request, 'pfinal/detalle_curso.html', {'cursos': cursos})
+
+def nuevo_curso(request):
+    if request.method == "POST":
+        form = CursoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('pfinal.views.lista_cursos')#, pk=post.pk)
+    else:
+        form = CursoForm()
+    return render(request, 'pfinal/editar_curso.html', {'form': form})
+
+def editar_curso(request, pk):
+    cursos = get_object_or_404(Curso, pk=pk)
+    if request.method == "POST":
+        form = CursoForm(request.POST, instance=cursos)
+        if form.is_valid():
+            cursos.save()
+            return redirect('pfinal.views.lista_cursos')#, pk=post.pk)
+    else:
+        form = CursoForm(instance=cursos)
+    return render(request, 'pfinal/editar_curso.html', {'form': form})
+
 #
 #from django.contrib.auth.models import User
 #from django.contrib.auth import authenticate, login

@@ -1,0 +1,11 @@
+{% extends 'pfinal/base.html' %}
+
+{% block content %}
+    {% for curso in cursos %}
+    <div class="post">
+        <p>Curso: </p>
+        <h1><a href="{% url 'pfinal.views.detalle_curso' pk=curso.pk %}">{{ curso.nombre }}</a></h1>
+        <p>Descripcion: {{ curso.descripcion }}</p>
+    </div>
+    {% endfor %}
+{% endblock content %}
