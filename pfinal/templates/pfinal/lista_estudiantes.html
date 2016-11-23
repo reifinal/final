@@ -10,10 +10,11 @@
     
     {% endfor %}
 
-    {% if user.is_autenticated %}
+    {% if user.is_authenticated %}
         {{user.username}}
-    <a href="{% url 'pfinal.auth_views.logout' %}">salir</a>
-    {% else %}
-    <a href="{% url 'pfinal.views.authentication' %}">iniciar</a>
+    <a href="{% url 'logout' %}">salir</a>
+    {% endif %}
+    {% if not user.is_authenticated %}
+    <a href="{% url 'authentication' %}">iniciar</a>
     {% endif %}
 {% endblock content %}
